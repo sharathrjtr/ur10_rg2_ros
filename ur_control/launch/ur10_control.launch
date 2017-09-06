@@ -4,7 +4,7 @@
 
   <!-- from ur_moder_driver ur5_bringup.launch -->
   <!-- robot_ip: IP-address of the robot's socket-messaging server -->
-  <arg name="robot_ip" default="192.168.2.220"/>
+  <arg name="robot_ip" default="192.168.2.200"/>
   <arg name="config" default="true"/>
   <arg name="limited" default="false"/>
   <arg name="min_payload"  default="0.0"/>
@@ -28,6 +28,6 @@
 
   <!--include file="$(find ur10_rg2_moveit_config)/launch/ur10_moveit_planning_execution.launch"/-->
 
-  <!--node name="ur5_control_server" pkg="ur5_control" type="server_ur10_node.py" /-->
+  <!--node name="ur5_control_server" pkg="ur5_control" type="rg2_server_node.py" /-->
 
 </launch>
