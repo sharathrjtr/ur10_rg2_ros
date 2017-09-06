@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!-- xacro for rg2 mounted on the manipulator -->
+
+<robot name="rg2" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="rg2" params="prefix">
+
+    <!-- rg2 joint -->
+    <joint name="rg2_joint" type="fixed">
+      <origin rpy="0 0 0" xyz="0.218 0 0"/>
+      <parent link="${prefix}gripper_extender_link"/>
+      <child link="${prefix}rg2_body_link"/>
+    </joint>
+    <link name="${prefix}rg2_body_link">
+      <visual>
+        <origin rpy="0 ${M_PI/2} 0" xyz="0.051 0.0085 0.0015"/>
+        <geometry>
+          <mesh filename="package://robot_descriptions/meshes/rg2_gripper/dae_rg2_.dae" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="White">
+          <color rgba="1.0 1.0 1.0 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <origin rpy="0 ${M_PI/2} 0" xyz="0.051 0.0085 0.0015"/>
+        <geometry>
+          <mesh filename="package://robot_descriptions/meshes/rg2_gripper/rg2_.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="1"/>
+        <inertia ixx="1" ixy="0.0" ixz="0.0" iyy="1" iyz="0.0" izz="1"/>
+      </inertial>
+    </link>
+
+    <joint name="rg2_eef_joint" type="fixed">
+      <origin rpy="0 0 0" xyz="0.195 0.0 0.0"/>
+      <parent link="rg2_body_link"/>
+      <child link="rg2_eef_link"/>
+    </joint>
+    <link name="rg2_eef_link"/>
+
+  </xacro:macro>
+</robot>

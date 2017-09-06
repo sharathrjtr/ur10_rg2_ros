@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="limited" default="false"/>
+  <arg name="paused" default="false"/>
+  <arg name="gui" default="true"/>
+  
+  <!-- startup simulated world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" default="$(find robot_descriptions)/worlds/ur5.world"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="gui" value="$(arg gui)"/>
+  </include>
+
+  <!-- send robot urdf to param server -->
+  <include file="$(find robot_descriptions)/launch/ur10_upload.launch">
+    <arg name="limited" value="$(arg limited)"/>
+  </include>
+
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot -z -0.0" respawn="false" output="screen" />
+
+  <include file="$(find robot_descriptions)/launch/controller_utils_ur10_vgs.launch"/>
+
+  <rosparam file="$(find robot_descriptions)/controller/arm_controller_ur10_vgs.yaml" command="load"/>
+  <node name="arm_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn arm_controller" respawn="false" output="screen"/>
+
+<!-- spawn primitive object into scene -->
+  <!--node name="spawn_obj_model" pkg="gazebo_ros" type="spawn_model" args="-sdf -file /home/ilab/.gazebo/models/cylinder_object/model.sdf -model fev1 -x 0.0 -y 0.0 -z -0.0" respawn="false" output="screen" /-->
+
+</launch>

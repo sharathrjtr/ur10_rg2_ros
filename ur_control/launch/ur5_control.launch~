@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <!-- from ur_moder_driver ur5_bringup.launch -->
+  <!-- robot_ip: IP-address of the robot's socket-messaging server -->
+  <!--arg name="robot_ip" default="192.168.1.102"/--> <!-- tcs ur5-->
+  <arg name="robot_ip" default="192.168.2.220"/>
+  <arg name="config" default="true"/>
+  <arg name="limited" default="false"/>
+  <arg name="min_payload"  default="0.0"/>
+  <arg name="max_payload"  default="5.0"/>
+  <arg name="prefix" default="" />
+
+  <!-- from universal_robot/ur_description/launch/ur5_upload.launch -->
+  <!-- robot model -->
+  <include file="$(find robot_descriptions)/launch/ur5_upload.launch">
+    <arg name="limited" value="$(arg limited)"/>
+  </include>
+
+  <!--param unless="$(arg limited)" name="robot_description" textfile="$(find ur5_control)/urdf/ur5_robot_suction.urdf" />
+  <param if="$(arg limited)" name="robot_description" command="$(find xacro)/xacro.py '$(find ur_description)/urdf/ur5_joint_limited_robot.urdf.xacro'" /-->
+  
+  <!-- ur common -->
+  <include file="$(find ur_modern_driver)/launch/ur_common.launch">
+    <arg name="prefix"  value="$(arg prefix)" />
+    <arg name="robot_ip" value="$(arg robot_ip)"/>
+    <arg name="min_payload"  value="$(arg min_payload)"/>
+    <arg name="max_payload"  value="$(arg max_payload)"/>
+  </include>
+
+
+  <!--include file="$(find ur5_moveit_config)/launch/ur5_moveit_planning_execution.launch"/-->
+
+  <!--node name="ur5_control_node" pkg="ur5_control" type="ur5_control_node" /-->
+
+</launch>

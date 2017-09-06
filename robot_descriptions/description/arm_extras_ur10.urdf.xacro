@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<!-- xacro for extras components mounted on the manipulator -->
+
+<robot name="arm_extras" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="arm_extras" params="prefix joint_limited kinect_prefix">
+  
+    <link name="${prefix}ground_base1">
+      <visual>
+        <geometry>
+          <box size="0.9 0.9 0.1"/>
+        </geometry>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <material name="white">
+          <color rgba="${150/255} ${150/255} ${150/255} 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.9 0.9 0.1"/>
+        </geometry>
+        <origin xyz=" 0 0 0.05" rpy="0 0 0"/>
+      </collision>
+      <!--xacro:default_inertial mass="20"/-->
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="100"/>
+        <inertia ixx="1"  ixy="0"  ixz="0" iyy="1" iyz="0" izz="1" />
+      </inertial>
+    </link>
+
+    <!-- ROS base_link to UR 'Base' Coordinates transform -->
+    <joint name="${prefix}base_pillar_joint" type="fixed">
+      <origin xyz="0 0 0.1" rpy="0 0 0"/>
+      <parent link="${prefix}ground_base1"/>
+      <child link="${prefix}base_pillar"/>
+    </joint>
+    <link name="${prefix}base_pillar">
+      <visual>
+        <geometry>
+          <box size=".15 .15 0.62"/>
+        </geometry>
+        <origin xyz="0 0 0.31" rpy="0 0 0"/>
+        <material name="white">
+          <color rgba="${150/255} ${150/255} ${150/255} 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <box size=".15 .15 0.62"/>
+        </geometry>
+        <origin xyz=" 0 0 0.31" rpy="0 0 0"/>
+      </collision>
+      <!--xacro:default_inertial mass="10"/-->
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="50"/>
+        <inertia ixx="1"  ixy="0"  ixz="0" iyy="1" iyz="0" izz="1" />
+      </inertial>
+    </link>
+
+    <!-- define joint from base_pillar to base_link-->
+    <joint name="${prefix}base_link_joint" type="fixed">
+      <origin xyz="0 0 0.62" rpy="0 0 0"/>
+      <parent link="${prefix}base_pillar"/>
+      <child link="${prefix}base_link"/>
+    </joint>
+
+<!-- Transform link from arm to kinect -->
+    <joint name="kinect_joint" type="fixed">
+      <origin rpy="0 0 0" xyz="0 0.11 0"/>
+      <parent link="${prefix}ee_link"/>
+      <child link="${kinect_prefix}kinect_back_link"/>
+    </joint>
+    <link name="${kinect_prefix}kinect_back_link"/>
+
+<!-- gripper extender link -->
+    <joint name="gripper_extender_joint" type="fixed">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <parent link="${prefix}ee_link"/>
+      <child link="${prefix}gripper_extender_link"/>
+    </joint>
+    <link name="${prefix}gripper_extender_link">
+      <visual>
+        <geometry>
+          <cylinder length="0.218" radius="0.014"/>
+        </geometry>
+        <origin rpy="0 ${M_PI/2} 0" xyz="0.104 0.0 0.0"/>
+        <material name="White">
+          <color rgba="${150/255} ${150/255} ${150/255} 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder length="0.218" radius="0.014"/>
+        </geometry>
+        <origin rpy="0 ${M_PI/2} 0" xyz="0.104 0.0 0.00"/>
+      </collision>
+      <inertial>
+        <mass value="0.6"/>
+        <inertia ixx="1" ixy="0.0" ixz="0.0" iyy="1" iyz="0.0" izz="1"/>
+      </inertial>
+    </link>
+
+
+  </xacro:macro>
+</robot>

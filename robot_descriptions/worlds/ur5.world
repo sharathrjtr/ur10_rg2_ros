@@ -1,0 +1,106 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <world name="world">
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+ <!--model name='unit_box_1'>
+      <pose>0 0.65 1.35 0 0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>.1 .1 .1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+             <size>.1 .1 .1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+
+        <gravity>1</gravity>
+      </link>
+    </model-->
+
+
+<!--include>
+      <uri>model://kiva_pod</uri>
+      <name>kiva_pod</name>
+      <pose>-0 1.4 0 0 0 0</pose>
+</include-->
+        
+
+
+<!--include>
+      <uri>model://brick_box_3x1x3 </uri>
+      <name>brick_box_3x1x3</name>
+      <pose>-0.0 1.6 .5 0 0 0</pose>
+</include-->
+        
+
+<!--link name= 'chasis'>
+            
+            <collision name='collision'>
+              <geometry>
+                <box>
+                  <size> 1  1  .089519 </size>
+                </box>
+              </geometry>
+            </collision>
+
+            <visual name='visual'>
+              <geometry>
+                 <box>
+                 <size> 1  1  .089519</size>
+                </box>
+                </geometry>
+               </visual>
+             
+           
+
+
+</link-->
+
+
+<!--joint name="fixed" type="fixed">
+    <parent link="chasis"/>
+    <child link="${prefix}base_link"/>
+</joint-->
+
+</world>
+</sdf>

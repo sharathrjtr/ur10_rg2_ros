@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- send table urdf to param server -->
+  <!-- push table_description to factory and spawn robot in gazebo -->
+
+  <param name="storage_description" command="$(find xacro)/xacro.py $(find robot_descriptions)/description/storage.urdf.xacro" />
+
+  <!-- storage -->
+  <node name="spawn_storage" pkg="gazebo_ros" type="spawn_model" args="-urdf -param storage_description -x 0.0 -y 0.0 -z 0 -model storage" respawn="false" output="screen" />
+
+  <!--node name="spawn_cylinder" pkg="gazebo_ros" type="spawn_model" args="-file /home/ilab/.gazebo/models/cylinder_object/model.sdf -sdf  -model fevicol -x 0.8 -y 0.0 -z 0.4" respawn="false" output="screen" /-->
+
+<!-- following command places fevicol, oreo and ball in bin 4 center -->
+<!--
+Note: for all objects gravity is made 0
+rosrun gazebo_ros spawn_model -file /home/ilab/.gazebo/models/cylinder_object/model.sdf -sdf -model fevicol3 -x 0.8 -y 0.0 -z 0.4
+rosrun gazebo_ros spawn_model -file /home/ilab/.gazebo/models/sphere_object/model.sdf -sdf -model sphere -x 0.8 -y -0.06 -z 0.4
+rosrun gazebo_ros spawn_model -file /home/ilab/.gazebo/models/my_box/model.sdf -sdf -model box -x 0.8 -y 0.06 -z 0.4
+
+For generating results
+rosrun gazebo_ros spawn_model -file /home/ilab/.gazebo/models/my_box/model.sdf -sdf -model box -x 0.92 -y -0.04 -z 0.34
+rosrun gazebo_ros spawn_model -file /home/ilab/.gazebo/models/cylinder_object/model.sdf -sdf -model fevicol3 -x 0.90 -y 0.025 -z 0.4
+
+command to delete
+rosservice call /gazebo/delete_model "model_name: box"
+-->
+
+ 
+  <!--node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="30.0" />
+    <param name="tf_prefix" type="string" value="robot2"/>
+  </node-->
+
+
+
+  <!-- The semantic description that corresponds to the URDF of storage-->
+  <!--param name="storage_description_semantic" textfile="$(find storage_2016_moveit_config)/config/storage.srdf" /-->
+
+</launch>

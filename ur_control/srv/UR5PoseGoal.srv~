@@ -1,0 +1,7 @@
+geometry_msgs/Point centroid
+geometry_msgs/Point axis
+geometry_msgs/Point normal
+std_msgs/Bool retrace_pose_goal
+---
+std_msgs/Bool success
+

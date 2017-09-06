@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <node name="ur5_control_node" pkg="ensenso_foscam_calibration" type="ur5_control_node" />
+
+</launch>
+
+

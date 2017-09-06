@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!-- xacro for kinect, created using kinect.urdf.xacro from turtlebot_description/sensors/kinect.urdf.xacro -->
+
+<robot name="sensor_kinect" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_gazebo.urdf.xacro"/>
+  <!--xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_properties.urdf.xacro"/-->
+  
+  <!-- Parameterised in part by the values in turtlebot_properties.urdf.xacro -->
+  <!-- create a parent at same location as kinect_link frame and send link name in parent param while calling macro-->
+  <xacro:macro name="sensor_kinect" params="prefix parent"><!-- prefix can be used in case of multiple sensors -->
+
+    <joint name="camera_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <parent link="${parent}"/>
+      <child link="${prefix}kinect_link"/>
+    </joint>  
+      <link name="${prefix}kinect_link">
+      <visual>
+       <origin xyz="0.03 0.0 0" rpy="-1.570796325 1.570796325 0"/>
+       <geometry>
+         <mesh filename="package://turtlebot_description/meshes/sensors/kinect.dae"/>
+       </geometry>
+       <!-- Always check placing of the collision box by seeing it in the visual, uncomment below place box in visual and then keep same dimensions in the collision parameter-->	
+       <!--geometry>
+  	 <box size="0.27794 0.07271 0.073"/>
+       </geometry-->
+      </visual>
+      <collision>
+        <origin xyz="0.03 0.0 0" rpy="-1.570796325 1.570796325 0"/>
+  	<geometry>
+  	  <box size="0.27794 0.07271 0.073"/>
+  	</geometry>
+      </collision>
+      <inertial>
+        <mass value="0.564" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.003881243" ixy="0.0" ixz="0.0"
+                 iyy="0.000498940" iyz="0.0"
+                 izz="0.003879257" />
+      </inertial>
+    </link>
+
+    <!-- The fixed joints & links below are usually published by static_transformers launched by the OpenNi launch 
+         files. However, for Gazebo simulation we need them, so we add them here.
+         (Hence, don't publish them additionally!) -->
+
+	<!--joint name="camera_link_joint" type="fixed">
+    	  <parent link="${prefix}kinect_link"/>
+	  <child link="${prefix}camera_link"/>
+    	  <origin rpy="-1.570796325 0.0 0.0" xyz="0.0605 0.015 -0.0325" />
+	</joint>
+	<link name="${prefix}camera_link"/>
+	
+	<joint name="camera_rgb_joint" type="fixed">
+	  <origin xyz="0 -0.045 0" rpy="0 0 0" />
+          <parent link="${prefix}camera_link"/>
+      	  <child link="${prefix}camera_rgb_frame" />
+    	</joint>
+    	<link name="${prefix}camera_rgb_frame"/>
+
+    	<joint name="camera_rgb_optical_joint" type="fixed">
+      	  <origin xyz="0 0 0" rpy="${-M_PI/2} 0 ${-M_PI/2}" />
+      	  <parent link="${prefix}camera_rgb_frame" />
+      	  <child link="${prefix}camera_rgb_optical_frame" />
+    	</joint>
+    	<link name="${prefix}camera_rgb_optical_frame"/>
+
+	<joint name="camera_depth_joint" type="fixed">
+	  <origin xyz="0 -0.02 0" rpy="0 0 0" />
+	  <parent link="${prefix}camera_link" />
+	  <child link="${prefix}camera_depth_frame" />
+	</joint>
+	<link name="${prefix}camera_depth_frame"/>
+
+	<joint name="camera_depth_optical_joint" type="fixed">
+	  <origin xyz="0 0 0" rpy="${-M_PI/2} 0 ${-M_PI/2}" />
+	  <parent link="${prefix}camera_depth_frame" />
+	  <child link="${prefix}camera_depth_optical_frame" />
+	</joint>
+	<link name="${prefix}camera_depth_optical_frame"/-->
+	
+
+
+	<!-- Kinect sensor for simulation -->
+	<turtlebot_sim_3dsensor/>
+  </xacro:macro>
+</robot>

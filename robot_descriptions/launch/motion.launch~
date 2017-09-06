@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="sim" default="true"/>
+
+  <include file="$(find ur5_arc_moveit_config)/launch/ur5_moveit_planning_execution.launch">
+    <arg name="sim" value="$(arg sim)"/>
+  </include>
+
+  <node name="ur5_control_node" pkg="ur5_control" type="ur5_control_node" />
+  <node name="apc_simulation" pkg="apc_controller" type="apc_simulation" />
+  <node name="primitives_node" pkg="fit_primitives" type="object_node" />
+
+</launch>
