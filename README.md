@@ -29,7 +29,8 @@ Visualize in RViz:
 or
 + $roslaunch urdf_tutorial display.launch model:=robot_descriptions/description/ur10_robot_rg2_arc.urdf.xacro gui:=true
 
-Control opening width of Gripper, checking gripping action with ur_modern_driver:
+Connect the RG2 gripper with the UR manipulator
+Control opening width of Gripper in real, checking gripping action with ur_modern_driver:
 + $ roslaunch ur_control ur10_control.launch robot_ip:=${robot_ip}
 + $ rosrun ur_control rg2_server_node.py
 
