@@ -1,6 +1,0 @@
-geometry_msgs/Point object_pose
-std_msgs/Float32 length
-std_msgs/Float32 breadth
-std_msgs/Float32 height
----
-std_msgs/Bool suc
