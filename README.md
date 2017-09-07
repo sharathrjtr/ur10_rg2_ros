@@ -36,11 +36,11 @@ Connect the RG2 gripper with the UR manipulator. Now control opening width of Gr
 + $ rosrun ur_control rg2_server_node.py
 
 Control opening width in mm. Usual range 110 to 0 mm
-+ Open: $ rosservice call /rg2_gripper/control_width 110
-+ Close: $ rosservice call /rg2_gripper/control_width 0
++ Open: $ rosservice call /rg2_gripper/control_width ur_control/RG2 110
++ Close: $ rosservice call /rg2_gripper/control_width ur_control/RG2 0
 
 To check whether an object has been gripped or not
-+ $ rosservice call /rg2_gripper/grip_detect
++ $ rosservice call /rg2_gripper/grip_detect ur_control/RG2_Grip
 
 
 
